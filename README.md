@@ -6,7 +6,7 @@ add to composer.json following
 
 or
 
-`composer require achertovsky/yii2-json-formatter "@dev"
+`composer require achertovsky/yii2-json-formatter "@dev"`
 
 
 # To configure formatter
