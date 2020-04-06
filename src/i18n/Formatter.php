@@ -4,8 +4,22 @@ namespace achertovsky\formatter\i18n;
 
 use yii\i18n\Formatter as I18nFormatter;
 
+/**
+ * Extends vanilla formatter to display pretty json
+ */
 class Formatter extends I18nFormatter
 {
+    /**
+     * Undocumented function
+     *
+     * @param mixed $data
+     * Data to display
+     * @param integer $level
+     * Internal param. Used to define amount of tabs
+     * @param string $lineBreak
+     * Will be added to end of every line.
+     * @return void
+     */
     public function asJson($data, $level = 0, $lineBreak = "<br>")
     {
         if (is_string($data)) {
@@ -39,6 +53,12 @@ class Formatter extends I18nFormatter
         return $result;
     }
 
+    /**
+     * Tabbing func.
+     *
+     * @param integer $level
+     * @return void
+     */
     private static function tab($level)
     {
         return str_pad('', ($level*4)*6, '&nbsp;');
