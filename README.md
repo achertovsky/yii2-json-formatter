@@ -3,6 +3,7 @@
 add to composer.json following
 
 `"achertovsky/yii2-json-formatter": "@dev"`
+
 or
 
 `composer require achertovsky/yii2-json-formatter "@dev"
