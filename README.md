@@ -1,4 +1,12 @@
-To install formatter
+# install 
+
+add to composer.json following
+`"achertovsky/yii2-json-formatter": "@dev"`
+or
+`composer require achertovsky/yii2-json-formatter "@dev"
+
+
+# To configure formatter
 ```
     'components' => [
         'formatter' => [
@@ -8,7 +16,7 @@ To install formatter
     ],
 ```
 
-to use formatter
+# to use formatter
 ```
 Yii::$app->formatter->asJson($array);
 ```
