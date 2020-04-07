@@ -30,9 +30,12 @@ class Formatter extends I18nFormatter
         $lastKey = key($data);
         foreach ($data as $key => $traceLine) {
             if (is_string($traceLine) || is_numeric($traceLine) || is_bool($traceLine)) {
-                if ($traceLine == '') {
+                if ($traceLine === '') {
                     $result .= '';
                     continue;
+                }
+                if (is_bool($traceLine) && $traceLine === false) {
+                    $traceLine = '0';
                 }
                 $result .= self::tab($level == 1 ? 0 : $level).(is_int($key) ? '' : "$key: ").
                     trim($traceLine).($key == $lastKey ? "" : "$lineBreak");
