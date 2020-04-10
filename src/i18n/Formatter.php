@@ -41,6 +41,9 @@ class Formatter extends I18nFormatter
                     trim($traceLine).($key == $lastKey ? "" : "$lineBreak");
                 continue;
             }
+            if (is_null($traceLine)) {
+                continue;
+            }
             $result .= self::tab($level)."<b>$key:</b>$lineBreak";
             foreach ($traceLine as $key => $value) {
                 $long = false;
