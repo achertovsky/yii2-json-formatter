@@ -23,7 +23,7 @@ class Formatter extends I18nFormatter
     public function asJson($data, $level = 0, $lineBreak = "<br>")
     {
         if (is_string($data)) {
-            return $data;
+            return strip_tags($data, "<b></b>$lineBreak");
         }
         $result = '';
         end($data);
@@ -56,7 +56,7 @@ class Formatter extends I18nFormatter
                 $result .= trim(self::tab($level+1)."$key:".($long ? "$lineBreak" : " ")."$value")."$lineBreak";
             }
         }
-        return $result;
+        return strip_tags($result, "<b></b>$lineBreak");
     }
 
     /**
