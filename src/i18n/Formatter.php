@@ -29,6 +29,9 @@ class Formatter extends I18nFormatter
         end($data);
         $lastKey = key($data);
         foreach ($data as $key => $traceLine) {
+            if (is_object($traceLine)) {
+                $traceLine = (array)$traceLine;
+            }
             if (is_string($traceLine) || is_numeric($traceLine) || is_bool($traceLine)) {
                 if ($traceLine === '') {
                     $result .= '';
