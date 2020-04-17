@@ -23,7 +23,7 @@ class Formatter extends I18nFormatter
     public function asJson($data, $level = 0, $lineBreak = "<br>")
     {
         if (is_string($data)) {
-            return strip_tags($data, "<b></b>$lineBreak");
+            return $data;
         }
         $result = '';
         end($data);
@@ -40,6 +40,7 @@ class Formatter extends I18nFormatter
                 if (is_bool($traceLine) && $traceLine === false) {
                     $traceLine = '0';
                 }
+                $traceLine = htmlspecialchars($traceLine);
                 $result .= self::tab($level == 1 ? 0 : $level).(is_int($key) ? '' : "$key: ").
                     trim($traceLine).($key == $lastKey ? "" : "$lineBreak");
                 continue;
@@ -47,19 +48,12 @@ class Formatter extends I18nFormatter
             if (is_null($traceLine)) {
                 continue;
             }
-            $result .= self::tab($level)."<b>$key:</b>$lineBreak";
-            foreach ($traceLine as $key => $value) {
-                $long = false;
-                if (is_array($value) && !empty($value)) {
-                    $value = $this->asJson($value, $level+2);
-                    $long = true;
-                } elseif (empty($value)) {
-                    $value = '';
-                }
-                $result .= trim(self::tab($level+1)."$key:".($long ? "$lineBreak" : " ")."$value")."$lineBreak";
+            if (is_array($traceLine)) {
+                $result .= self::tab($level)."<b>$key:</b>$lineBreak";
+                $result .= $this->asJson($traceLine, $level+2).($lastKey == $key ? '' : $lineBreak);
             }
         }
-        return strip_tags($result, "<b></b>$lineBreak");
+        return $result;
     }
 
     /**
